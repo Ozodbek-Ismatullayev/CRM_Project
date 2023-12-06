@@ -1,9 +1,9 @@
 <template>
   <div class="profile">
     <UpdateUser ref="update_user" />
-    <!-- <form-modal ref="profile_modal" :title_text="title_text"/>
-    <changeRole ref="change_role"/>
-    <changePassword ref="change_password"/> -->
+    <ChangeRole ref="change_role"/>
+    <ChangePassword ref="change_password"/>
+    <!-- <form-modal ref="profile_modal" :title_text="title_text"/> -->
     <div class="profile__items">
       <div class="profile__item1">
         <div class="profile__item1-img">
@@ -12,12 +12,7 @@
         <p>
           {{ $store?.state?.me?.first_name }} {{ $store?.state?.me?.last_name }}
         </p>
-        <button
-          class="profile__item1-edit"
-          @click="openModalEdit($store?.state?.me)"
-        >
-          Edit profile
-        </button>
+        <button class="profile__item1-edit" @click="openModalEdit($store?.state?.me)">Edit profile</button>
       </div>
       <div class="profile__item2">
         <p>
@@ -46,30 +41,34 @@
           <span>Current role</span>
           <i class="fa-solid fa-right-long"></i>
           <span> {{ $store?.state?.me?.current_role }}</span>
-          <button
-            class="profile__item-change_role"
-            @click="open_change_modal_role"
-          >
-            change
-          </button>
+          <button class="profile__item-change_role" @click="openModalChangeRole">change</button>
         </p>
-        <button
-          class="profile__item2-change-p"
-          @click="open_change_modal_password"
-        >
-          Change password
-        </button>
+        <button class="profile__item2-change-p" @click="openModalChangePassword">Change password</button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import ChangePassword from "./modalPages/ChangePassword.vue";
+import ChangeRole from "./modalPages/ChangeRole.vue";
 import UpdateUser from "./modalPages/UpdateUser.vue";
 import { ref } from "vue";
-const update_user = ref('');
+
+const update_user = ref("");
+const change_role = ref("");
+const change_password = ref("");
+
 const openModalEdit = (value) => {
     update_user.value.openModal(value)
+};
+
+const openModalChangeRole = () => {
+    change_role.value.OpenModal()
+};
+
+const openModalChangePassword = () => {
+    change_password.value.openModal()
 };
 </script>
 

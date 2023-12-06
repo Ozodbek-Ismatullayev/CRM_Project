@@ -72,12 +72,12 @@
 </template>
 
 <script setup>
+import Notification from "@/plugins/Notification";
 import http from "@/plugins/axios";
+import appModal from "@/ui/app-modal.vue";
 import { Field, Form } from "vee-validate";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import appModal from "@/ui/app-modal.vue";
-import Notification from "@/plugins/Notification";
 const router = useRouter()
 const dialog = ref(false)
 const form = ref({
@@ -120,7 +120,7 @@ const Login_With_Role =()=>{
             localStorage.setItem('token', res?.data.access)
             localStorage.setItem('role', res?.data.current_role)
             if(res?.data?.current_role === 'warehouseman'){
-                router.push({name: "warehouse"})
+                router.push({name: "products"})
             }else if(res?.data?.current_role === "director"){
                 router.push({name: "director"})
             }else if(res?.data?.current_role === "financier"){

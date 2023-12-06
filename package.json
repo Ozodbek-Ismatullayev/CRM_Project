@@ -7,6 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@hennge/vue3-pagination": "^1.0.17",
     "@vee-validate/rules": "^4.11.6",
     "axios": "^1.5.0",
     "bootstrap": "^5.3.1",

@@ -1,22 +1,33 @@
 <template>
     <section class="warehouse">
+
        <div class="warehouse__sidebar">
-        <Sidebar/>
+        <Sidebar :items="sidebar_items"/>
        </div>
+
        <div class="warehouse__main1">
         <div class="warehouse-navbar">
             <Navbar/>
         </div>
         <router-view class="router"></router-view>
        </div>
+       
     </section>
 </template>
 
 <script setup>
 import Sidebar from '@/components/layout/Sidebar.vue';
 import Navbar from '@/components/layout/Navbar.vue';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import store from '@/store'
+
+const sidebar_items = ref([
+{title: "Products", path: "/products", icon: 'fa-solid fa-list'},
+{title: "Arrived", path: "/arrived", icon: 'fa-solid fa-building-circle-check'},
+{title: "Delivered", path: "/delivered", icon: 'fa-solid fa-building-circle-arrow-right'},
+{title: "Returned", path: "/returned", icon: 'fa-solid fa-building-circle-exclamation'},
+{title: "Suppliers", path: "/suppliers", icon: 'fa-solid fa-truck-field'},
+])
 onMounted(() => {
     store.dispatch('getMe')
 })

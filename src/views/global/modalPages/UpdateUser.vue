@@ -98,6 +98,7 @@ import AppModal from "@/ui/app-modal.vue";
 import { ref, defineExpose } from "vue";
 import { Field, Form } from "vee-validate";
 import http from "@/plugins/axios";
+import Notification from "@/plugins/Notification";
 // import '@/assets/css/global.scss'
 const dialog = ref(false);
 const image = ref(null);
@@ -126,7 +127,14 @@ const send = () => {
     headers: {
       "content-type": "multipart/form-data",
     },
-  });
+  }).then(res=>{
+    if(res.status === 200){
+      window.location.reload();
+      Notification({ text: "Image updated !!!" },{type: 'success'})
+    }
+  }).catch(err=>{
+    console.log(err);
+  })
 };
 console.log(dialog.value);
 defineExpose({ openModal });

@@ -1,22 +1,24 @@
 <template>
   <div class="sidebar">
-    <div class="sidebar__img" @click="props.isShowItem">
+    <div class="sidebar__img" @click="$props.isShowItem">
       <i class="img-icon fa-solid fa-bars-staggered"></i>
     </div>
     <div class="sidebar__items">
-      <router-link
-        to="/products"
-        active-class="sidebar__item1"
-        class="sidebar__item"
-      >
-        <span><i class="fa-solid fa-list"></i></span>
-        <span :class="isShow ? 'sidebar__items-title' : ''">Products</span>
+      <router-link v-for="(item, index) in items" :key="index" :to="item.path" active-class="sidebar__item1" class="sidebar__item">
+        <span><i :class="item.icon"></i></span>
+        <span :class="isShow ? 'sidebar__items-title' : ''">{{item.title}}</span> 
       </router-link>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const props = defineProps({
+  items:{
+    type: Array
+  }
+})
+</script>
 
 <style lang="scss" scoped>
 $blue-color: #435ebe;
